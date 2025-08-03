@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+    <title>Registro de Ticket Técnico</title>
+    <style>
+        body {
+            background: #f4f8fb;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 380px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            padding: 32px 28px 24px 28px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 18px auto;
+            width: 120px;
+        }
+        h2 {
+            color: #0072ce;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        label {
+            color: #0072ce;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px 10px;
+            margin: 6px 0 16px 0;
+            border: 1px solid #b3d4fc;
+            border-radius: 5px;
+            font-size: 15px;
+            background: #f7fbff;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        input[type="submit"] {
+            background: #0072ce;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 0;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        input[type="submit"]:hover {
+            background: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo_cnt.png') }}" alt="Logo CNT" class="logo">
+        <h2>Formulario de Ticket</h2>
+        <form method="POST" action="/registrar">
+            <label>Nombre del Cliente:</label>
+            <input type="text" name="nombre" required>
+            <label>Número de Contrato:</label>
+            <input type="text" name="contrato" required>
+            <label>Descripción de la Falla:</label>
+            <textarea name="descripcion" required></textarea>
+            <label>Categoría:</label>
+            <input type="text" name="categoria" required>
+            <label>Prioridad:</label>
+            <input type="text" name="prioridad" required>
+            <input type="submit" value="Registrar Ticket">
+        </form>
+    </div>
+</body>
+</html>
