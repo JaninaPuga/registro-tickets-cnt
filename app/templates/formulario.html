@@ -10,12 +10,12 @@
             padding: 0;
         }
         .container {
-            width: 380px;
+            width: 400px;
             margin: 40px auto;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            padding: 32px 28px 24px 28px;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+            padding: 36px 32px 28px 32px;
         }
         .logo {
             display: block;
@@ -26,38 +26,67 @@
             color: #0072ce;
             text-align: center;
             margin-bottom: 22px;
+            letter-spacing: 1px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         label {
             color: #0072ce;
             font-weight: bold;
+            margin-bottom: 4px;
         }
         input[type="text"], textarea, select {
             width: 100%;
-            padding: 8px 10px;
-            margin: 6px 0 16px 0;
+            padding: 10px 12px;
+            margin-bottom: 8px;
             border: 1px solid #b3d4fc;
-            border-radius: 5px;
+            border-radius: 7px;
             font-size: 15px;
             background: #f7fbff;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus, textarea:focus, select:focus {
+            border: 1.5px solid #0072ce;
+            outline: none;
+            background: #eaf4fd;
         }
         textarea {
             resize: vertical;
-            min-height: 60px;
+            min-height: 70px;
         }
         input[type="submit"] {
-            background: #0072ce;
+            background: linear-gradient(90deg, #0072ce 60%, #005fa3 100%);
             color: #fff;
             border: none;
-            border-radius: 5px;
-            padding: 10px 0;
+            border-radius: 7px;
+            padding: 12px 0;
             width: 100%;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 2px 8px rgba(0,114,206,0.08);
+            transition: background 0.2s, transform 0.1s;
         }
         input[type="submit"]:hover {
-            background: #005fa3;
+            background: linear-gradient(90deg, #005fa3 60%, #0072ce 100%);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .select-wrapper {
+            position: relative;
+        }
+        .select-wrapper::after {
+            content: "▼";
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0072ce;
+            pointer-events: none;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -65,30 +94,39 @@
     <div class="container">
         <img src="{{ url_for('static', filename='logo_cnt.png') }}" alt="Logo CNT" class="logo">
         <h2>Formulario de Ticket</h2>
-        <form method="POST" action="/registrar">
-            <label>Nombre del Cliente:</label>
-            <input type="text" name="nombre" required>
-            <label>Número de Contrato:</label>
-            <input type="text" name="contrato" required>
-            <label>Descripción de la Falla:</label>
-            <textarea name="descripcion" required></textarea>
-            <label>Categoría:</label>
-            <select name="categoria" required>
-                <option value="">Seleccione una opción</option>
-                <option value="Telefonica movil">Telefonica movil</option>
-                <option value="Telefonia Fija">Telefonia Fija</option>
-                <option value="Internet Movil">Internet Movil</option>
-                <option value="Internet Hogar">Internet Hogar</option>
-                <option value="Telefonia Empresa">Telefonia Empresa</option>
-                <option value="Internet Empresa">Internet Empresa</option>
-            </select>
-            <label>Prioridad:</label>
-            <select name="prioridad" required>
-                <option value="">Seleccione una opción</option>
-                <option value="Normal">Normal</option>
-                <option value="Urgente">Urgente</option>
-                <option value="Urgentisimo">Urgentisimo</option>
-            </select>
+        <form method="POST" action="/registrar" autocomplete="off">
+            <label for="nombre">Nombre del Cliente:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez">
+
+            <label for="contrato">Número de Contrato:</label>
+            <input type="text" id="contrato" name="contrato" required placeholder="Ej: 1234567890">
+
+            <label for="descripcion">Descripción de la Falla:</label>
+            <textarea id="descripcion" name="descripcion" required placeholder="Describe el problema..."></textarea>
+
+            <label for="categoria">Categoría:</label>
+            <div class="select-wrapper">
+                <select id="categoria" name="categoria" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Telefonica movil">Telefonica movil</option>
+                    <option value="Telefonia Fija">Telefonia Fija</option>
+                    <option value="Internet Movil">Internet Movil</option>
+                    <option value="Internet Hogar">Internet Hogar</option>
+                    <option value="Telefonia Empresa">Telefonia Empresa</option>
+                    <option value="Internet Empresa">Internet Empresa</option>
+                </select>
+            </div>
+
+            <label for="prioridad">Prioridad:</label>
+            <div class="select-wrapper">
+                <select id="prioridad" name="prioridad" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Urgente">Urgente</option>
+                    <option value="Urgentisimo">Urgentisimo</option>
+                </select>
+            </div>
+
             <input type="submit" value="Registrar Ticket">
         </form>
     </div>
