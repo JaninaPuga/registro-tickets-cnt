@@ -31,7 +31,7 @@
             color: #0072ce;
             font-weight: bold;
         }
-        input[type="text"], textarea {
+        input[type="text"], textarea, select {
             width: 100%;
             padding: 8px 10px;
             margin: 6px 0 16px 0;
@@ -73,9 +73,22 @@
             <label>Descripción de la Falla:</label>
             <textarea name="descripcion" required></textarea>
             <label>Categoría:</label>
-            <input type="text" name="categoria" required>
+            <select name="categoria" required>
+                <option value="">Seleccione una opción</option>
+                <option value="Telefonica movil">Telefonica movil</option>
+                <option value="Telefonia Fija">Telefonia Fija</option>
+                <option value="Internet Movil">Internet Movil</option>
+                <option value="Internet Hogar">Internet Hogar</option>
+                <option value="Telefonia Empresa">Telefonia Empresa</option>
+                <option value="Internet Empresa">Internet Empresa</option>
+            </select>
             <label>Prioridad:</label>
-            <input type="text" name="prioridad" required>
+            <select name="prioridad" required>
+                <option value="">Seleccione una opción</option>
+                <option value="Normal">Normal</option>
+                <option value="Urgente">Urgente</option>
+                <option value="Urgentisimo">Urgentisimo</option>
+            </select>
             <input type="submit" value="Registrar Ticket">
         </form>
     </div>
